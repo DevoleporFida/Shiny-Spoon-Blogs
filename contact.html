@@ -3,22 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shiny Spoon Blog</title>
+    <title>Contact Us</title>
     <style>
-      body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-            color: #333;
         }
-        header {
+         header {
             background-color: #333;
             color: #fff;
             padding: 20px;
-            text-align: center;
-        }
-        section {
             text-align: center;
         }
         nav {
@@ -33,33 +29,43 @@
         }
         .container {
             max-width: 800px;
-            margin: 20px auto;
+            margin: 50px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .post {
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
             margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
-        .post h2 {
-            margin-top: 0;
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        .post p {
-            margin-bottom: 10px;
+        input[type="submit"]:hover {
+            background-color: #45a049;
         }
         footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
+              background-color: #333;
+              color: #fff;
+              padding: 20px;
+              text-align: center;
+          }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>My Blog</h1>
+    <h1>Shiny Spoon Blog</h1>
 </header>
 
 <nav>
@@ -67,24 +73,47 @@
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
 </nav>
+    
+<div class="container">
+    <h2>Contact Us</h2>
+    <form id="contactForm" method="post">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
 
-<div>
-    <img src="image1.jpeg" alt="Description of the image">
-    <section class="section">
-            <h1>Contact Information</h1>
-    </section>
-    <section>
-        <p>This is my email 👇</p>
-    </section>    
-    <section>
-        <p>Email: king.bro.f.295@gmail.com</p>
-    </section>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <input type="submit" value="Submit">
+    </form>
+    <div id="response"></div>
 </div>
 
-<footer>
-    <p>&copy; 2024 My Blog</p>
-    <p>      By Fida Ur Rehman</p>
-</footer>
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event){
+        event.preventDefault();
+        var formData = new FormData(this);
+        fetch("/submit_contact_form.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("response").innerHTML = data;
+            document.getElementById("contactForm").reset();
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    });
+</script>
 
+    <footer>
+        <p>&copy; 2024 My Blog</p>
+        <p>       By Fida Ur Rehman</p>
+    </footer>
 </body>
 </html>
+
