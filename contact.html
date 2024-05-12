@@ -6,26 +6,23 @@
     <title>Contact Us</title>
     <style>
         body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+              background-color: #333;
+              color: #333;
+          }
+          header {
+              background-color: #333;
+              color: #fff;
+              padding: 20px;
+              text-align: center;
+          }
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-        }
-         header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        nav {
-            background-color: #666;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
         }
         .container {
             max-width: 800px;
@@ -54,7 +51,17 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-        footer {
+        nav {
+              background-color: #666;
+              padding: 10px;
+              text-align: center;
+          }
+          nav a {
+              color: #fff;
+              text-decoration: none;
+              margin: 0 10px;
+          }
+          footer {
               background-color: #333;
               color: #fff;
               padding: 20px;
@@ -64,53 +71,25 @@
 </head>
 <body>
 
-<header>
+   
+  <header>
     <h1>Shiny Spoon Blog</h1>
 </header>
 
 <nav>
-    <a href="home.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+  <a href="home.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
 </nav>
-    
-<header>
-    <h2>My Email Is:</h2>
-   <p>king.bro.f.295@gmail.com</p>
- </header>
-    <style>
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
+<body>
+   <header>
+    <h3>My Email Is:</h3>
+    <a href="mailto:King.bro.f.295@gmail.com">King.bro.f.295@gmail.com</a>
+   </header>
 
 <div class="container">
     <h2>Contact Us</h2>
-    <form action="https://formspree.io/king.bro.f.295@gmail.com" method="POST">
+    <form id="contactForm" method="post">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" required>
 
@@ -122,13 +101,32 @@
 
         <input type="submit" value="Submit">
     </form>
+    <div id="response"></div>
 </div>
 
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event){
+        event.preventDefault();
+        var formData = new FormData(this);
+        fetch("/submit_contact_form.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("response").innerHTML = data;
+            document.getElementById("contactForm").reset();
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    });
+</script>
 
-    <footer>
+  <footer>
         <p>&copy; 2024 My Blog</p>
         <p>Powered By Fida Ur Rehman</p>
-    </footer>
+   </footer>
 </body>
 </html>
 
