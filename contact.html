@@ -77,10 +77,40 @@
 <header>
     <h2>My Email Is:</h2>
    <p>king.bro.f.295@gmail.com</p>
-</header>
+ </header>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+
 <div class="container">
     <h2>Contact Us</h2>
-    <form id="contactForm" method="post">
+    <form action="https://formspree.io/king.bro.f.295@gmail.com" method="POST">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" required>
 
@@ -92,27 +122,8 @@
 
         <input type="submit" value="Submit">
     </form>
-    <div id="response"></div>
 </div>
 
-<script>
-    document.getElementById("contactForm").addEventListener("submit", function(event){
-        event.preventDefault();
-        var formData = new FormData(this);
-        fetch("/submit_contact_form.php", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("response").innerHTML = data;
-            document.getElementById("contactForm").reset();
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    });
-</script>
 
     <footer>
         <p>&copy; 2024 My Blog</p>
