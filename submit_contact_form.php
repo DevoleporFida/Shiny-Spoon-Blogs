@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Email message
-    $to = "your-email@example.com"; // Your email address
+    $to = "king.bro.f.295@gmail.com"; // Your email address
     $subject = "New message from Contact Us form";
     $body = "Name: $name\nEmail: $email\nMessage: $message";
 
