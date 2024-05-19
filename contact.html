@@ -67,61 +67,74 @@
               padding: 20px;
               text-align: center;
           }
+                body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        form {
+            display: grid;
+            gap: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="email"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
     </style>
+
 </head>
 <body>
 
-   
-  <header>
-    <h1>Shiny Spoon Blog</h1>
-</header>
-
-<nav>
-  <a href="home.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-</nav>
-<body>
-   <header>
-    <h3>My Email Is:</h3>
-    <a href="mailto:King.bro.f.295@gmail.com">King.bro.f.295@gmail.com</a>
-   </header>
-
 <div class="container">
     <h2>Contact Us</h2>
-    <form id="contactForm" method="post">
-        <label for="name">Name</label>
+    <form action="https://formspree.io/f/mzbnwrlp" method="POST">
+        <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
 
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" required>
+        <label for="email">Your email:</label>
+        <input type="email" id="email" name="email" required>
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
+        <label for="message">Your message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
 
-        <input type="submit" value="Submit">
+        <button type="submit">Send</button>
     </form>
-    <div id="response"></div>
 </div>
-
-<script>
-    document.getElementById("contactForm").addEventListener("submit", function(event){
-        event.preventDefault();
-        var formData = new FormData(this);
-        fetch("/submit_contact_form.php", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("response").innerHTML = data;
-            document.getElementById("contactForm").reset();
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    });
-</script>
 
   <footer>
         <p>&copy; 2024 My Blog</p>
