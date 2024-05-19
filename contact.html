@@ -148,9 +148,22 @@
         <label for="message">Your message:</label>
         <textarea id="message" name="message" rows="5" required></textarea>
 
-        <button type="submit">Send</button>
+        <button type="submit"class="g-recaptcha" 
+        data-sitekey="6LePueEpAAAAAAKF7RvL0IyQGT62nb8LobO4Ncbk" 
+        data-callback='onSubmit' 
+        data-action='submit'>Submit</button>
+
     </form>
 </div>
+
+<script>
+    function onSubmit(token) {
+      document.getElementById("demo-form").submit();
+    }
+  </script>
+ 
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
 
   <footer>
         <p>&copy; 2024 My Blog</p>
