@@ -1,32 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        form {
+            display: grid;
+            gap: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="email"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            pointer-events: none; /* Initially disable the button */
+            opacity: 0.5; /* Initially make the button look disabled */
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+    </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
-<header>
-    <h1>Shiny Spoon Blog</h1>
-</header>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-</nav>
-<body>
-   <header>
-    <h3>My Email Is:</h3>
-    <a href="mailto:King.bro.f.295@gmail.com">King.bro.f.295@gmail.com</a>
-   </header>
-
-
 <div class="container">
     <h2>Contact Us</h2>
-    <form action="https://formspree.io/f/mayrkrkw" method="POST">
+    <form id="contact-form" action="https://formspree.io/f/mzbnwrlp" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
 
@@ -36,27 +72,20 @@
         <label for="message">Your message:</label>
         <textarea id="message" name="message" rows="5" required></textarea>
 
-        <button type="submit"class="g-recaptcha" 
-        data-sitekey="6LeBweEpAAAAANj9jaX6zKHAUPMXyNBRxHhSRGD7" 
-        data-callback='onSubmit' 
-        data-action='submit'>Submit</button>
+        <div class="g-recaptcha" data-sitekey="6LdRw-EpAAAAAFFOTL-h0FxyxZmwO1EISigBziiB" data-callback="recaptchaCallback"></div>
 
+        <button type="submit">Send</button>
     </form>
+    <div class="response" id="response"></div>
 </div>
 
 <script>
-    function onSubmit(token) {
-      document.getElementById("demo-form").submit();
+    function recaptchaCallback() {
+        const submitButton = document.querySelector('button[type="submit"]');
+        submitButton.style.pointerEvents = 'auto'; // Enable the button
+        submitButton.style.opacity = '1'; // Make the button fully visible
     }
-  </script>
- 
-<script src="https://www.google.com/recaptcha/api.js"></script>
+</script>
 
-
-  <footer>
-        <p>&copy; 2024 My Blog</p>
-        <p>Powered By Fida Ur Rehman</p>
-   </footer>
 </body>
 </html>
-
